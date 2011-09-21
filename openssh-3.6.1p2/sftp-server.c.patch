@@ -1,0 +1,29 @@
+24,26d23
+< #include <pwd.h>
+< #include <sys/types.h>
+<
+378d374
+<      buffer_put_char(&msg, 65);
+1021d1016
+<      struct passwd *entry;
+1025,1029c1020,1021
+< #ifdef DEBUG_SFTP_SERVER
+<      log_init("sftp-server", SYSLOG_LEVEL_DEBUG1, SYSLOG_FACILITY_AUTH, 0);
+< #endif
+<
+<      entry = getpwuid(getuid());
+---
+>      __progname = get_progname(av[0]);
+>      handle_init();
+1032c1024
+<      log("getuid(): %d  entry->pw_dir: %s\n", getuid(), entry->pw_dir);
+---
+>      log_init("sftp-server", SYSLOG_LEVEL_DEBUG1, SYSLOG_FACILITY_AUTH, 0);
+1034,1040d1025
+<
+<      chroot(entry->pw_dir);
+<      chdir("/");
+<      setuid(getuid());
+<
+<      __progname = get_progname(av[0]);
+<      handle_init();
